@@ -13,6 +13,7 @@ class CreateNiceActionLogsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('nice_action_logs');
         Schema::create('nice_action_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('nice_action_id');

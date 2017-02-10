@@ -84,6 +84,19 @@
 					<input type="submit" class="btn btn-primary" value="Submit">
 				</form>
 			</div>
+			<div class="col-md-3">
+				<?php $__currentLoopData = $logged_actions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $logged_action): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+					<li>
+						<?php echo e($logged_action->nice_action->name); ?>
+
+						<ul>
+							<?php $__currentLoopData = $logged_action->nice_action->categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<li><?php echo e($category->name); ?></li>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+						</ul>
+					</li>
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+			</div>
 		</div>
 	</div>
 <?php $__env->stopSection(); ?>

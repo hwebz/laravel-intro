@@ -84,7 +84,14 @@
 			</div>
 			<div class="col-md-3">
 				@foreach($logged_actions as $logged_action)
-					<li>{{ $logged_action }}</li>
+					<li>
+						{{ $logged_action->nice_action->name }}
+						<ul>
+							@foreach($logged_action->nice_action->categories as $category)
+								<li>{{ $category->name }}</li>
+							@endforeach
+						</ul>
+					</li>
 				@endforeach
 			</div>
 		</div>

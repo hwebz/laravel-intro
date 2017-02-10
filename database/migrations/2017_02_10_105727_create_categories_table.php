@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNiceActions extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateNiceActions extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('nice_actions');
-        Schema::create('nice_actions', function (Blueprint $table) {
+        Schema::dropIfExists('categories');
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('niceness');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateNiceActions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nice_actions');
+        Schema::dropIfExists('categories');
     }
 }

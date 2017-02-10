@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [
+	'uses' => 'NiceActionController@getHome',
+	'as' => 'home'
+]);
 
 Route::get('/greet/{name?}', function($name = null) {
 	return view('actions.greet')->with('name', $name); // /greet/JimiDARK
@@ -39,4 +40,13 @@ Route::post('/', function(\Illuminate\http\Request $request) {
 Route::post('/login', [
 	'uses' => 'UserController@postLogin',
 	'as' => 'login'
+]);
+
+Route::get('/nice/{action}/{name}', [
+	'uses' => 'NiceActionController@getNiceAction'
+])->name('nice');
+
+Route::post('/addaction', [
+	'uses' => 'NiceActionController@postAddAction',
+	'as' => 'addaction'
 ]);

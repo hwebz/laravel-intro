@@ -8,7 +8,7 @@ class UserController extends Controller
 {
 
     public function postLogin(Request $request) {
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'username' => 'required|min:4|max:20',
             'password' => 'required|min:3'
         ]);
@@ -17,6 +17,10 @@ class UserController extends Controller
             'username' => $request['username'],
             'password' => $request['password']
         );
+
+        if (isset($validation) && $validation->fails()) {
+            return redirect()->route('home')->withErrors($validation, 'userErrors');
+        }
 
         return view('home')->with('message', 'Login successfully!');
     }

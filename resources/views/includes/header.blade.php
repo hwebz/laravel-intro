@@ -14,9 +14,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('greet') }}">Greet</a></li>
-                    <li><a href="{{ route('hug') }}">Hug</a></li>
-                    <li><a href="{{ route('kiss') }}">Kiss</a></li>
+                    @if(isset($actions))
+                        @foreach($actions as $action)
+                            <li><a href="{{ route('nice', ['action' => strtolower($action->name), 'name' => 'JimiDARK']) }}">{{ $action->name }}</a></li>
+                        @endforeach
+                    @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Link</a></li>

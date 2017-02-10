@@ -14,9 +14,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="<?php echo e(route('greet')); ?>">Greet</a></li>
-                    <li><a href="<?php echo e(route('hug')); ?>">Hug</a></li>
-                    <li><a href="<?php echo e(route('kiss')); ?>">Kiss</a></li>
+                    <?php if(isset($actions)): ?>
+                        <?php $__currentLoopData = $actions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $action): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><a href="<?php echo e(route('nice', ['action' => strtolower($action->name), 'name' => 'JimiDARK'])); ?>"><?php echo e($action->name); ?></a></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endif; ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Link</a></li>

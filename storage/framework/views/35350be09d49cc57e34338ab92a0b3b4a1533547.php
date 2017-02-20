@@ -35,5 +35,6 @@
         </script>
         <script src="https://www.google-analytics.com/analytics.js" async defer></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <?php echo $__env->yieldContent('scripts'); ?>
     </body>
 </html>

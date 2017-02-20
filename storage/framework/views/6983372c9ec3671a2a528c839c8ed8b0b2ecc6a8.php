@@ -24,15 +24,15 @@
 				<?php endif; ?>
 				<form action="<?php echo e(route('addaction')); ?>" method="post">
 					<div class="form-group">
-						<label for="actionname">Action name</label>
-						<input type="text" class="form-control" id="actionname" name="actionname">
+						<label for="name">Action name</label>
+						<input type="text" class="form-control" id="name" name="name">
 					</div>
 					<div class="form-group">
 						<label for="niceness">Niceness</label>
 						<input type="text" class="form-control" id="niceness" name="niceness">
 					</div>
 					<input type="hidden" name="_token" value="<?php echo e(Session::token()); ?>">
-					<input type="submit" class="btn btn-primary" value="Submit">
+					<input type="submit" onclick="send(event)" class="btn btn-primary" value="Submit">
 				</form>
 			</div>
 			<div class="col-md-3">
@@ -96,9 +96,26 @@
 						</ul>
 					</li>
 				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				
+				<?php echo $logged_actions->links(); ?>
+
+				
 			</div>
 		</div>
 	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	<script type="text/javascript">
+		function send(event) {
+			event.preventDefault();
+			$.ajax({
+				type: "POST",
+				url: "<?php echo e(route('addaction')); ?>",
+				data: { name: $("#name").val(), niceness: $("#niceness").val(), _token: "<?php echo e(Session::token()); ?>" }
+			});
+		}
+	</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

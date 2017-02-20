@@ -24,15 +24,15 @@
 				@endif
 				<form action="{{ route('addaction') }}" method="post">
 					<div class="form-group">
-						<label for="actionname">Action name</label>
-						<input type="text" class="form-control" id="actionname" name="actionname">
+						<label for="name">Action name</label>
+						<input type="text" class="form-control" id="name" name="name">
 					</div>
 					<div class="form-group">
 						<label for="niceness">Niceness</label>
 						<input type="text" class="form-control" id="niceness" name="niceness">
 					</div>
 					<input type="hidden" name="_token" value="{{ Session::token() }}">
-					<input type="submit" class="btn btn-primary" value="Submit">
+					<input type="submit" onclick="send(event)" class="btn btn-primary" value="Submit">
 				</form>
 			</div>
 			<div class="col-md-3">
@@ -93,7 +93,27 @@
 						</ul>
 					</li>
 				@endforeach
+				{{-- {{ dd($db) }} --}}
+				{!! $logged_actions->links() !!}
+				{{-- @if($logged_actions->lastPage() > 1)
+					@for($i = 0; $i < $logged_actions->lastPage(); $i++)
+						<a href="{{ $logged_actions->url($i) }}">{{ $i }}</a>
+					@endfor
+				@endif --}}
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('scripts')
+	<script type="text/javascript">
+		function send(event) {
+			event.preventDefault();
+			$.ajax({
+				type: "POST",
+				url: "{{ route('addaction') }}",
+				data: { name: $("#name").val(), niceness: $("#niceness").val(), _token: "{{Session::token()}}" }
+			});
+		}
+	</script>
 @endsection
